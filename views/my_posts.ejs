@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fresh Insights - My Posts</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            color: #333;
+            font-family: 'Verdana', sans-serif;
+            margin-bottom: 20px;
+        }
+
+        .nav {
+            width: 80%;
+            max-width: 800px;
+            padding: 10px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .nav a {
+            color: #3498db;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav a:hover {
+            background-color: #ecf0f1;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 800px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            overflow: hidden; /* Ensures content doesn’t overflow the rounded corners */
+        }
+
+        .post {
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            background: transparent; /* Removed white background */
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-title {
+            font-size: 28px;
+            color: #2c3e50;
+            margin: 0;
+            font-family: 'Georgia', serif;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .post-content {
+            font-size: 18px;
+            color: #555;
+            margin: 0;
+        }
+
+        .post-date {
+            font-size: 14px;
+            color: #777;
+            text-align: right;
+            margin-top: 15px;
+        }
+
+        .error {
+            color: #e74c3c;
+            font-size: 18px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .no-posts {
+            font-size: 18px;
+            color: #95a5a6;
+            text-align: center;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .post-btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #ffffff;
+            transition: background-color 0.3s ease;
+        }
+
+        .post-btn.edit {
+            background-color: green;
+        }
+
+        .post-btn.delete {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/homepage">Home</a>
+        <a href="/new">Create New Post</a>
+    </div>
+    <h1>Your Own Posts</h1>
+    <div class="container">
+        <% if (locals.error) { %>
+            <p class="error"><%= error %></p>
+        <% } else { %>
+            <% for (let i = 0; i < posts.length; i++) { %> 
+                <% let post = posts[i]; %>
+                <div class="post">
+                    <h2 class="post-title" style="text-align: center;"><%= post.title %></h2>
+                    <p class="post-content"><%= post.content %></p>
+                    <p class="post-date"><strong>Date posted: <%= post.date_published.substring(0,10) %></strong></p>
+                    <div class="actions">
+                        <form action="/edit">
+                            <button type="submit" class="post-btn edit">Edit</button>
+                        </form>
+                        <form action="/my-posts/<%= post.post_id %>" method="POST">
+                            <button type="submit" class="post-btn delete">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            <% } %>
+        <% } %>
+    </div>
+</body>
+</html>

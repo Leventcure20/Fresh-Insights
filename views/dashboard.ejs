@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fresh Insights - Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+    .left-items {
+      display: flex;
+      align-items: center;
+    }
+    .right-items {
+      display: flex;
+      align-items: center;
+    }
+    .item {
+      margin-right: 15px;
+      font-size: 18px;
+    }
+    .item a {
+      text-decoration: none;
+      color: #333;
+    }
+    
+    .item a:hover {
+      text-decoration: underline;
+    }
+    #logout {
+      color: blue;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <%- include('partials/header') %>
+  <div class="container">
+    <div class="left-items">
+      <h4 class="item"><a href="/my-posts">My Own Posts</a></h4>
+    </div>
+    <div class="right-items">
+      <h4 class="item"><a href="/dashboard">Dashboard</a></h4>
+      <h4 class="item"><a href="/homepage">Home</a></h4>
+      <h4 class="item"><a href="/new">Create New Post</a></h4>
+      <h4 id="logout"><a href="/logout">Log Out</a></h4>
+    </div>
+  </div>
+</body>
+</html>
+<%- include('partials/footer') %>
+</body>
+</html>

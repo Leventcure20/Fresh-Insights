@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fresh Insights- Edit</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column; /* Align items vertically */
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .nav {
+      width: 100%;
+      max-width: 600px;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #ddd;
+      background-color: #ffffff; /* Background color for consistency */
+      border-radius: 10px; /* Match post-body radius */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Match post-body shadow */
+      margin-bottom: 20px; /* Space below the nav */
+    }
+
+    .nav a {
+      text-decoration: none;
+      font-size: 18px;
+      color: #333; /* Text color */
+    }
+
+    .nav a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 600px;
+      padding: 20px;
+    }
+
+    .post-body {
+      background-color: #ffffff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .input-field {
+      display: block;
+      width: calc(100% - 20px); /* Full width minus padding */
+      margin-bottom: 15px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 15px; /* Rounded corners */
+      font-size: 16px;
+      box-sizing: border-box; /* Includes padding and border in the width */
+    }
+
+    textarea {
+      height: 150px; /* Height for content field */
+      resize: vertical; /* Allows resizing only vertically */
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .post-btn {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      color: #ffffff;
+      transition: background-color 0.3s ease;
+      display: flex;
+      flex-direction: row;
+      background-color: green;
+      margin-left: auto;
+    }
+
+    .post-btn:hover {
+      background-color: #004d00; /* Darker shade for hover effect */
+    }
+
+  </style>
+</head>
+<body>
+  <div class="nav">
+    <a href="/dashboard">Dashboard</a>
+    <a href="/homepage">Home</a>
+    <a href="/new">Create New Post</a>
+</div>
+<div class="container">
+    <form action="/edit/<%= post.post_id %>" method="POST">
+        <div class="post-body">
+            <h3 style="text-align: center;"><strong>User: <%= post.email %></strong></h3>
+            <input type="text" name="title" value="<%= post.title %>" placeholder="Enter title here" class="input-field" required>
+            <textarea name="content" placeholder="Enter content here" class="input-field" required><%= post.content %></textarea>
+            <div>
+                <button type="submit" class="post-btn post">Update Post</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

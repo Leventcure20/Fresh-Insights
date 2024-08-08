@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homepage</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      color: #333;
+      font-family: 'Verdana', sans-serif;
+      margin-bottom: 20px;
+    }
+
+    .nav {
+      width: 80%;
+      max-width: 800px;
+      padding: 10px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .nav a {
+      color: #3498db;
+      text-decoration: none;
+      font-size: 16px;
+      padding: 10px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .nav a:hover {
+      background-color: #ecf0f1;
+    }
+
+    .container {
+      width: 80%;
+      max-width: 800px;
+      padding: 20px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-top: 20px;
+      overflow: hidden;
+    }
+
+    .post {
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      background: transparent; /* Removed white background */
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .post-title {
+      font-size: 24px;
+      color: #2c3e50;
+      margin: 0;
+      font-family: 'Georgia', serif;
+      border-bottom: 1px solid #3498db;
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+    }
+
+    .post-content {
+      font-size: 18px;
+      color: #555;
+      margin: 0;
+    }
+
+    .post-email {
+      font-size: 14px;
+      color: #555;
+      margin-top: 10px;
+    }
+
+    .no-posts {
+      font-size: 18px;
+      color: #95a5a6;
+      text-align: center;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .post-btn {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      color: #ffffff;
+      transition: background-color 0.3s ease;
+    }
+
+    .post-btn.edit {
+      background-color: green;
+    }
+
+    .post-btn.edit:hover {
+      background-color: #004d00; /* Darker green for hover */
+    }
+
+    .post-btn.delete {
+      background-color: red;
+    }
+
+    .post-btn.delete:hover {
+      background-color: #b30000; /* Darker red for hover */
+    }
+  </style>
+</head>
+<body>
+  <div class="nav">
+    <a href="/dashboard">Dashboard</a>
+    <a href="/homepage">Home</a>
+    <a href="/new">Create New Post</a>
+  </div>
+  
+  <h1>All Posts</h1>
+  
+  <div class="container">
+    <!-- Display owned posts -->
+    <% for (let i = 0; i < ownedPosts.length; i++) { %> 
+      <% let post = ownedPosts[i]; %>
+      <div class="post">
+          <p style="text-align: center;"><strong>User: <%= post.email%></strong> </p>
+          <h2 class="post-title" style="text-align: center;"><%= post.title %></h2>
+          <p class="post-content"><%= post.content %></p>
+          <p class="post-date" style="text-align: right;"><strong>Date posted: <%= post.date_published %></strong></p>
+          <div class="actions">
+              <form action="/edit">
+                  <button type="submit" class="post-btn edit">Edit</button>
+              </form>
+              <form action="/homepage/<%= post.post_id %>" method="POST">
+                  <button type="submit" class="post-btn delete">Delete</button>
+              </form>
+          </div>
+      </div>
+  <% } %>
+
+    <!-- Display other posts -->
+    <% for (let i = 0; i < otherPosts.length; i++) { %> 
+      <% let post = otherPosts[i]; %>
+      <div class="post">
+        <p style="text-align: center;"><strong>User: <%= post.email %></strong></p>
+          <h2 class="post-title" style="text-align: center;"><%= post.title %></h2>
+          <p class="post-content"><%= post.content %></p>
+          <p class="post-date" style="text-align: right;"><strong>Date posted: <%= post.date_published %></strong></p>
+          <div class="actions">
+          </div>
+      </div>
+  <% } %>
+  </div>
+</body>
+</html>
