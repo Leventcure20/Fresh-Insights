@@ -1,7 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import pg from "pg";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import session from "express-session";
 import passport from "passport";
 import { Strategy } from "passport-local";
@@ -236,7 +236,7 @@ app.post("/register", async (req, res) => {
           const user = result.rows[0];
           req.login(user, (err) => {
             console.log(err);
-            res.redirect("/dashboard")
+            res.redirect("/login")
           })
         }
       });
